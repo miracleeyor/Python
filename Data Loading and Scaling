@@ -1,0 +1,32 @@
+import sklearn.datasets
+from sklearn import preprocessing
+from sklearn.cluster import KMeans
+import matplotlib.pyplot as plt
+import numpy
+
+data = sklearn.datasets.load_iris()
+numData = data['data']
+scaledData = preprocessing.scale(numData)
+
+plt.subplot(231)
+kmeans = KMeans(n_clusters = 2, max_iter = 300)
+kmeans.fit(scaledData)
+predictions = kmeans.predict(scaledData)
+
+plt.scatter(scaledData[:, 0], scaledData[:, 1], c = predictions)
+plt.title("Clusters = 2")
+plt.xlabel("Sepal Length")
+plt.ylabel("Sepal Width")
+
+
+
+plt.subplot(232)
+kmeans = KMeans(n_clusters = 3, max_iter = 300)
+kmeans.fit(scaledData)
+predictions = kmeans.predict(scaledData)
+
+plt.scatter(scaledData[:, 0], scaledData[:, 1], c = predictions)
+plt.title("Clusters = 3")
+plt.xlabel("Sepal Length")
+plt.ylabel("Sepal Width")
+plt.show()
