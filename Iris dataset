@@ -1,0 +1,71 @@
+from pydataset import data
+import matplotlib.pyplot as plt
+
+iris = data('iris')
+
+plt.scatter(iris.iloc[:, 0], iris.iloc[:, 1])
+plt.title("Name: Miracle Eyor \n \n Iris Dataset - First and Second Variables")
+plt.xlabel(iris.columns[0])
+plt.ylabel(iris.columns[1])
+
+plt.show()
+
+# Pie chart showing the class counts
+class_counts = iris.groupby('Species').size()
+
+plt.pie(class_counts, labels=class_counts.index, autopct='%1.1f%%')
+plt.title("Name: Miracle Eyor \nIris Dataset - Class Counts")
+plt.show()
+
+
+
+# Histogram of Petal Length for each class
+setosa = iris[iris['Species'] == 'setosa']
+versicolor = iris[iris['Species'] == 'versicolor']
+virginica = iris[iris['Species'] == 'virginica']
+
+plt.hist(setosa['Petal.Length'], alpha=0.5, label='setosa')
+plt.hist(versicolor['Petal.Length'], alpha=0.5, label='versicolor')
+plt.hist(virginica['Petal.Length'], alpha=0.5, label='virginica')
+
+plt.legend()
+plt.title("Student Name: Miracle Eyor \nStudent Number: 0729424 \nIris Dataset - Petal Length Distribution")
+plt.xlabel("Petal Length")
+plt.ylabel("Frequency")
+plt.show()
+
+fig, axs = plt.subplots(2, 2)
+
+# Pie chart showing the class counts
+class_counts = iris.groupby('Species').size()
+axs[0, 0].pie(class_counts, labels=class_counts.index, autopct='%1.1f%%')
+axs[0, 0].set_title("Iris Dataset - Class Counts")
+
+# Scatterplot of first and third variables
+axs[0, 1].scatter(iris.iloc[:, 0], iris.iloc[:, 2])
+axs[0, 1].set_title("Iris Dataset - First and Third Variables")
+axs[0, 1].set_xlabel(iris.columns[0])
+axs[0, 1].set_ylabel(iris.columns[2])
+
+# Scatterplot of second and fourth variables
+axs[1, 0].scatter(iris.iloc[:, 1], iris.iloc[:, 3])
+axs[1, 0].set_title("Iris Dataset - Second and Fourth Variables")
+axs[1, 0].set_xlabel(iris.columns[1])
+axs[1, 0].set_ylabel(iris.columns[3])
+
+# Histogram of Petal Width for each class
+axs[1, 1].hist(setosa['Petal.Width'], alpha=0.5, label='setosa')
+axs[1, 1].hist(versicolor['Petal.Width'], alpha=0.5, label='versicolor')
+axs[1, 1].hist(virginica['Petal.Width'], alpha=0.5, label='virginica')
+axs[1, 1].legend()
+axs[1, 1].set_title("Iris Dataset - Petal Width Distribution")
+axs[1, 1].set_xlabel("Petal Width")
+axs[1, 1].set_ylabel('Sepal Width')
+# set the title for each subplot
+for ax in axs.flat:
+    ax.set_title('Student Name: Miracle Eyor \nStudent Number: 0729424')
+
+# hide the x-axis labels for the top plots and y-axis labels for the right plots
+for ax in axs.flat:
+    ax.label_outer()
+plt.show()
