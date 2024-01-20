@@ -1,0 +1,65 @@
+import numpy as np
+import time
+
+# Part 3: Summary statistics
+
+np.random.seed(42)
+
+# Make a random seed for reproducibility
+
+# Make a one-dimensional array with the number 1000 random integers between 1 and 100
+
+arr = np.random.randint(1, 101, size=1000)
+
+# Print the type of datatype and the shape of array
+
+print("Shape of the array:", arr.shape)
+print("Datatype of the array:", arr.dtype)
+
+# Print the different type of summary statistics like min, max, sum, mean, and standard deviation
+
+print("Minimum value:", np.min(arr))
+print("Maximum value:", np.max(arr))
+print("Sum of values:", np.sum(arr))
+print("Mean value:", np.mean(arr))
+print("Standard deviation:", np.std(arr))
+
+
+# Part 4: Sorting
+
+# Explain a function to catch the sorting of an array with different types of sorting algorithms
+
+def time_sorting(data, sort_type="quicksort"):
+    start_time = time.time()  # Record the start time
+    np.sort(data, kind=sort_type)  # Sort the data using the specified algorithm
+    end_time = time.time()  # Record the end time
+    return end_time - start_time  # Return the end time
+
+
+# Arrange the array sizes to test the sorting algorithms
+
+array_sizes = [100, 1000, 10000, 100000, 1000000]
+
+# List of sorting algorithms to test
+
+sort_algorithms = ["mergesort", "heapsort", "quicksort"]
+
+# Loop over the array sizes
+
+for size in array_sizes:
+
+    # make an array that is one - dimensional with scattered integers between 0 and 100 for the given size
+    data = np.random.randint(0, 101, size=size)
+
+    # Print the current array size
+
+    print(f"\nArray size: {size}")
+
+    # Loop through the sorting algorithms
+
+    for algo in sort_algorithms:
+        # Time the sorting algorithm for the current array
+        duration = time_sorting(data, sort_type=algo)
+
+        # Print the sorting time for the current algorithm
+        print(f"{algo.capitalize()} sorting time: {duration:.6f} seconds")
